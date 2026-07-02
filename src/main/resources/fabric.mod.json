@@ -17,9 +17,10 @@
   "mixins": [
     "texteffects.mixins.json"
   ],
+  "accessWidener": "dialogutils.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric": "*",
+    "fabric-api": "*",
     "minecraft": ">=1.21.9-"
   }
 }

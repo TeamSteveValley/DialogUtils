@@ -5,8 +5,8 @@ import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.RegistrationInfo;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,7 +30,7 @@ public abstract class MappedRegistryMixin<T> implements RegistryHack {
 
     @Shadow @Final private ObjectList<Holder.Reference<T>> byId;
 
-    @Shadow @Final private Map<ResourceLocation, Holder.Reference<T>> byLocation;
+    @Shadow @Final private Map<Identifier, Holder.Reference<T>> byLocation;
 
     @Shadow @Final private Map<ResourceKey<T>, Holder.Reference<T>> byKey;
 
@@ -42,7 +42,7 @@ public abstract class MappedRegistryMixin<T> implements RegistryHack {
     }
 
     @Override
-    public void du$remove(ResourceLocation key) {
+    public void du$remove(Identifier key) {
         var o = byLocation.remove(key);
         if (o != null) {
             this.byId.remove(o);

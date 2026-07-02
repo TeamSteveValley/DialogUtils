@@ -1,16 +1,15 @@
 package de.tomalbrc.dialogutils.util;
 
 import eu.pb4.mapcanvas.impl.font.BitmapFont;
-import eu.pb4.placeholders.api.TextParserUtils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class TextUtil {
     public enum Alignment {
         LEFT, CENTER, RIGHT
     }
 
-    public static int getGlyphWidth(int character, int offset, ResourceLocation font) {
+    public static int getGlyphWidth(int character, int offset, Identifier font) {
         var fr = FontUtil.fontReader(font);
         if (fr == null)
             return 5;
@@ -24,7 +23,7 @@ public class TextUtil {
         }
     }
 
-    public static int getTextWidth(String text, ResourceLocation font) {
+    public static int getTextWidth(String text, Identifier font) {
         if (text.isEmpty()) {
             return 0;
         } else {
@@ -35,10 +34,6 @@ public class TextUtil {
             }
             return posX;
         }
-    }
-
-    public static Component parse(String s) {
-        return TextParserUtils.formatText(s);
     }
 
 }

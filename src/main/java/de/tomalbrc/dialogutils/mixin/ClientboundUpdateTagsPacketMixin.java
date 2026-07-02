@@ -6,7 +6,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.common.ClientboundUpdateTagsPacket;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.DialogTags;
 import net.minecraft.tags.TagNetworkSerialization;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,7 +25,7 @@ public class ClientboundUpdateTagsPacketMixin {
         var reg = DialogUtils.SERVER.registryAccess().lookup(Registries.DIALOG);
         reg.ifPresent(registry -> {
             var list = new IntArrayList(payload.tags.get(DialogTags.QUICK_ACTIONS.location()));
-            for (ResourceLocation id : DialogUtils.getQuickActions()) {
+            for (Identifier id : DialogUtils.getQuickActions()) {
                 var obj = registry.getValue(id);
                 var rawid = registry.getId(obj);
                 list.add(rawid);

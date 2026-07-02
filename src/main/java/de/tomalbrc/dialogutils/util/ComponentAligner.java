@@ -4,7 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FontDescription;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 
 import java.util.Optional;
@@ -37,7 +37,7 @@ public class ComponentAligner {
         AtomicInteger w = new AtomicInteger(0);
         for (Component part : component.toFlatList()) {
             int val = part.visit((style, content) -> {
-                if (!(style.getFont() instanceof FontDescription.Resource(ResourceLocation id))) {
+                if (!(style.getFont() instanceof FontDescription.Resource(Identifier id))) {
                     return Optional.of(9); // 8 + 1
                 }
 

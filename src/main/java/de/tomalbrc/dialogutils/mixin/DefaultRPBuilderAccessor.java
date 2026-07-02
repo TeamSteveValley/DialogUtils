@@ -7,7 +7,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(value = DefaultRPBuilder.class, remap = false)
 public interface DefaultRPBuilderAccessor {
     @Invoker
-    default byte[] invokeGetSourceData(String path) {
-        throw new UnsupportedOperationException();
-    }
+    byte[] invokeGetSourceData(String path);
 }

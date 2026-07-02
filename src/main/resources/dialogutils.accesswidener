@@ -1,3 +1,3 @@
-accessWidener   v2  named
+classTweaker v1 official
 accessible class net/minecraft/core/MappedRegistry$TagSet
 accessible field net/minecraft/tags/TagNetworkSerialization$NetworkPayload tags Ljava/util/Map;

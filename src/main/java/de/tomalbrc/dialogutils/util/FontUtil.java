@@ -15,7 +15,7 @@ import eu.pb4.polymer.resourcepack.impl.generation.DefaultRPBuilder;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.FontDescription;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayInputStream;
@@ -27,11 +27,11 @@ import java.util.Objects;
 import java.util.function.Function;
 
 public class FontUtil {
-    public final static FontDescription.Resource FONT = new FontDescription.Resource(ResourceLocation.fromNamespaceAndPath(DialogUtils.MODID, "default"));
-    public static final FontDescription.Resource ALIGN_FONT = new FontDescription.Resource(ResourceLocation.fromNamespaceAndPath(DialogUtils.MODID, "align"));
-    public static Map<ResourceLocation, BitmapFont> FONTS = new Object2ObjectOpenHashMap<>();
+    public final static FontDescription.Resource FONT = new FontDescription.Resource(Identifier.fromNamespaceAndPath(DialogUtils.MODID, "default"));
+    public static final FontDescription.Resource ALIGN_FONT = new FontDescription.Resource(Identifier.fromNamespaceAndPath(DialogUtils.MODID, "align"));
+    public static Map<Identifier, BitmapFont> FONTS = new Object2ObjectOpenHashMap<>();
 
-    public static BitmapFont loadFont(ResourcePackBuilder resourcePackBuilder, ResourceLocation id) {
+    public static BitmapFont loadFont(ResourcePackBuilder resourcePackBuilder, Identifier id) {
         try {
             var fr = VanillaFontReader.build((x) -> new ByteArrayInputStream(Objects.requireNonNull(resourcePackBuilder.getDataOrSource(x))), CanvasFont.Metadata.create("Resource Pack Font", List.of("Unknown"), "Generated"),id);
             FONTS.put(id, fr);
@@ -46,18 +46,17 @@ public class FontUtil {
     public static BitmapFont fontReader(ResourcePackBuilder builder) {
         if (!FONTS.containsKey(FontDescription.DEFAULT.id())) {
             try {
-                if (builder == null) builder = PolymerResourcePackUtils.createBuilder(FabricLoader.getInstance().getGameDir().resolve("polymer/dialog"));
                 var fr = loadFont(builder, FontDescription.DEFAULT.id());
                 FONTS.put(FontDescription.DEFAULT.id(), fr);
                 FONTS.put(FontUtil.FONT.id(), fr);
-            } catch (Exception ignored) {}
+            } catch (Exception _) {}
         }
 
         return FONTS.get(FontDescription.DEFAULT.id());
     }
 
     @Nullable
-    public static BitmapFont fontReader(ResourceLocation font) {
+    public static BitmapFont fontReader(Identifier font) {
         return FONTS.get(font);
     }
 
